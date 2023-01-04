@@ -10,12 +10,12 @@ internal class BaseMappingProfile : Profile
     {
         AppDomain.CurrentDomain.GetAssemblies().ToList().ForEach(assembly =>
         {
-            ApplyMappingsFromAssembly(assembly);
-            ApplyMappingsToAssembly(assembly);
+            ApplyMappingsFrom(assembly);
+            ApplyMappingsTo(assembly);
         });
     }
 
-    private void ApplyMappingsFromAssembly(Assembly assembly)
+    private void ApplyMappingsFrom(Assembly assembly)
     {
         var types = assembly.GetExportedTypes()
             .Where(t => t.GetInterfaces().Any(i =>
@@ -33,7 +33,7 @@ internal class BaseMappingProfile : Profile
         }
     }
 
-    private void ApplyMappingsToAssembly(Assembly assembly)
+    private void ApplyMappingsTo(Assembly assembly)
     {
         var types = assembly.GetExportedTypes()
             .Where(t => t.GetInterfaces().Any(i =>
